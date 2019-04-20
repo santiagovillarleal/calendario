@@ -59,10 +59,20 @@ char obter_fila_matriz_meses(int ano)
 
   if ((ano>=1829)&&(ano<=1899)) fila=(ano%100)%28;
   if (ano==1900) fila=22;
-  if ((ano>=1901)&&(ano<=2000)) fila=((ano+4)%100)%28;
-  if ((ano>=2001)&&(ano<=2099)) fila=((ano+20)%100)%28;
+  if ((ano>=1901)&&(ano<=2000))
+  {
+    if (ano<=1980) fila=(ano+4)%100%28;
+    else fila=(ano-1980)%28;
+    //if (fila>1995) fila+=16;
+  }
+  if ((ano>=2001)&&(ano<=2099))
+  {
+    if (ano<=2079) fila=(ano+20)%100%28;
+    else fila=(ano-1980)%28;
+  }
   if (ano==2100) fila=13;
 
+  if (!fila) fila=28;
   fila--; //Matrices 0-based.
 
   return fila;
